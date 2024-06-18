@@ -1,0 +1,14 @@
+'''1 iniciante
+2 Intermediário
+3 Avançado
+>>> for category in categories: print(category.id, category.category)
+...
+1 Fundamentos
+2 Defesa Pessoal
+3 Raspagens
+4 Ataques Laterais
+5 Ataques nas Costas
+6 Passagem de Guarda
+7 Saida de Baixo
+9 Ataques Montados
+10 Ataques '''

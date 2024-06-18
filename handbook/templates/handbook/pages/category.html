@@ -1,0 +1,17 @@
+{% extends "global/base.html" %}
+{% block title %} {{title}}{% endblock title %}
+
+{% block content %}
+<div class="main-content container main-content-list">
+  
+  
+  
+    
+{% for move in moves %}
+  {% include "handbook/partials/move_card.html" %}
+{% endfor %}
+  
+
+  
+  </div>
+  {% endblock content %}
