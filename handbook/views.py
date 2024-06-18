@@ -4,32 +4,27 @@ from handbook.models import Moves
 
 
 def home(request):
-    movement= Moves.objects.filter(is_published=True).order_by('-movement_id')
-    return render(request, 'handbook/pages/index.html', context={
-        'moves': movement,
-    })
+    movement = Moves.objects.filter(is_published=True).order_by('-movement_id')  # noqa:E501
+    return render(request, 'handbook/pages/index.html', context={'moves': movement})  # noqa:E501
 
-def move(request,movement_id):
-    movement = get_object_or_404(Moves, movement_id=movement_id, is_published = True )
+
+def move(request, movement_id):
+    movement = get_object_or_404(Moves, movement_id=movement_id, is_published=True)  # noqa:E501
     return render(request, 'handbook/pages/move_detail.html', context={
         'move': movement,
-        'is_detail_page':True,
+        'is_detail_page': True,
     })
 
+
 def difficulty_def(request, difficulty_id):
-    difficultys = get_list_or_404(Moves.objects.filter(difficulty__id=difficulty_id, is_published=True)) 
-    return render(request,"handbook/pages/difficulty.html" ,
-                   context= {
-                       'moves': difficultys,
-                       'title': f'{difficultys[0].difficulty.difficulty} | Dificuldades '
-                       })
+    difficultys = get_list_or_404(Moves.objects.filter(difficulty__id=difficulty_id, is_published=True))  # noqa:E501
+    return render(request, "handbook/pages/difficulty.html",
+                  context={'moves': difficultys, 'title': f'{difficultys[0].difficulty.difficulty} | Dificuldades '})  # noqa:E501
+
 
 def category_def(request, category_id):
-    categorys = get_list_or_404(Moves.objects.filter(category__id=category_id, is_published=True).order_by('-movement_id'))
+    categorys = get_list_or_404(Moves.objects.filter(category__id=category_id, is_published=True).order_by('-movement_id'))  # noqa:E501
     return render(request, "handbook/pages/category.html",
-                   context={
-                       'moves':categorys,
-                       'title': f'{categorys[0].category.category} | Categorias '
-                       } )
-
-
+                  context={
+                      'moves': categorys,
+                      'title': f'{categorys[0].category.category} | Categorias'})  # noqa:E501
