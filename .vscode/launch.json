@@ -1,4 +1,5 @@
 {
+    "version": "0.2.0",
     "configurations": [
         {
             "name": "Python Debugger: Django",
@@ -8,7 +9,12 @@
             "args": [
                 "runserver"
             ],
-            "django": true
+            "django": true,
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
         }
     ]
 }
