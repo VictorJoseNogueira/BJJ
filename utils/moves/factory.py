@@ -1,3 +1,4 @@
+'''
 from random import randint, choice, choices
 from faker import Faker
 import string
@@ -39,3 +40,4 @@ if __name__ == '__main__':
     from pprint import pprint
     pprint(move_card_detail())
 
+'''

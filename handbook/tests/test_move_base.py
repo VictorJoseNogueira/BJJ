@@ -21,7 +21,14 @@ class MovesTestBase(TestCase):
     def make_difficulty(self, difficulty='DIFICULDADE'):
         return Difficulty.objects.create(difficulty=difficulty)
 
-    def make_moviment(self, category_data=None, difficulty_data=None, author_data=None, title='Movement title', title_slug='movement-title', is_published=True):  # noqa E501  
+    def make_moviment(self,
+                      category_data=None,
+                      difficulty_data=None,
+                      author_data=None,
+                      title='Movement title',
+                      title_slug='movement-title',
+                      is_published=True,
+                      Video_link='https://www.youtube.com/watch?v=WXa6eScLJxE'):  # noqa E501  
         if category_data is None:
             category_data = {}
         if difficulty_data is None:
@@ -35,4 +42,5 @@ class MovesTestBase(TestCase):
             author=self.make_author(**author_data),
             title=title,
             title_slug=title_slug,
+            Video_link=Video_link,
             is_published=is_published)  # noqa E501
