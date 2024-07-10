@@ -31,11 +31,12 @@ class MovesModelTest(MovesTestBase):
         self.assertFalse(moves.is_published)
 
     def test_movement_string_representation(self):
+        needed = 'testing representation'
         self.movement.title = 'testing representation'  # noqa E501
         self.movement.full_clean()
         self.movement.save()
         self.assertEqual(
             str(self.movement),
-            'testing representation',
+            needed,
             msg='Movement string needs to be the same as title'
         )
