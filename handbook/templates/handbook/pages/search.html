@@ -1,0 +1,20 @@
+{% extends "global/base.html" %}
+{% block title %} {{page_title}} {% endblock title %}
+
+{% block content %}
+<div class="main-content container main-content-list">
+  
+  
+  
+  {% for move in moves %}
+  {% include "handbook/partials/move_card.html" %}
+{% empty %}
+  <div class="center m-y">
+    <h1>Administrador esta preguiçoso mande ele aprovar as tecnicas logo</h1>
+  </div>
+    {% endfor %}
+
+  
+  
+  </div>
+  {% endblock content %}

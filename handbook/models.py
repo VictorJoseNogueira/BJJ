@@ -25,7 +25,7 @@ class Moves(models.Model):
     # title
     title = models.CharField(max_length=120)  # type: ignore
     # title-slug
-    title_slug = models.SlugField()  # type: ignore
+    title_slug = models.SlugField(unique=True)  # type: ignore
     # category
     category = models.ForeignKey(Category,
                                  on_delete=models.SET_NULL,

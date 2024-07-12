@@ -18,3 +18,7 @@ class Move_URL_test(TestCase):
     def test_handbook_category_url_is_correct(self):
         url = reverse("moves:category", kwargs={'category_id': 1})
         self.assertEqual(url, '/moves/categorias/1/')
+
+    def test_handbook_search_url_is_correct(self):
+        url = reverse("moves:search")
+        self.assertEqual(url, "/moves/search/")

@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from handbook.models import Moves
+from django.http import Http404
+from django.db.models import Q
+
 # Create your views here.
 
 
@@ -28,3 +31,20 @@ def category_def(request, category_id):
                   context={
                       'moves': categorys,
                       'title': f'{categorys[0].category.category} | Categorias'})  # noqa:E501
+
+
+def search_def(request):
+    search_term = request.GET.get('q', '').strip()
+    if not search_term:
+        raise Http404()
+
+    movement = Moves.objects.filter(
+        Q(Q(title__icontains=search_term) | Q(category__category__icontains=search_term) | Q(difficulty__difficulty__icontains=search_term)), Q(is_published=True)  # noqa E501
+    ).order_by('-movement_id')  # noqa E501
+
+    context = {
+        'page_title': f'Pesquisa por "{search_term}"',
+        'search_term': search_term,
+        'moves': movement,
+    }
+    return render(request, 'handbook/pages/search.html', context=context,)

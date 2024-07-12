@@ -23,7 +23,7 @@ class MovesModelTest(MovesTestBase):
                       difficulty=self.make_difficulty(difficulty='test default difficulty'),  # noqa E501
                       author=self.make_author(username='ze'),
                       title='Movement title',
-                      title_slug='movement-title',
+                      title_slug='movement-title-2',
                       Video_link='https://www.youtube.com/watch?v=WXa6eScLJxE')  # noqa E501
         print(moves)
         moves.full_clean()
