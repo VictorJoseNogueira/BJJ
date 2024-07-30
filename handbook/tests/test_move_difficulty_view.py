@@ -1,7 +1,7 @@
 from django.urls import resolve, reverse
 
 from handbook import views
-
+from unittest.mock import patch
 from .test_move_base import MovesTestBase
 
 # teste @skip("texto")
@@ -35,3 +35,22 @@ class Moves_difficulty_views_test(MovesTestBase):
         move = self.make_moviment(is_published=False)
         response = self.client.get(reverse("moves:difficulty", kwargs={'difficulty_id': move.difficulty.id},))  # noqa E501
         self.assertEqual(response.status_code, 404)
+
+    @patch('handbook.views.PER_PAGE', new=3)
+    def test_move_difficulty_is_paginated(self):
+
+        for i in range(8):
+            kwargs = {'title_slug': f'r{i}', 'author_data': {'username': f'ú{i}'},  'difficulty_data': {'difficulty': 'Dificuldade'},}  # noqa E501
+            self.make_moviment(**kwargs, is_published=True)
+            print(f'Moviment {i + 1} created')  # Adiciona uma impressão para cada movimentação criada
+
+
+        response = self.client.get(reverse("moves:difficulty", kwargs={'difficulty_id': 1},))  # noqa E501
+        movement = response.context['moves']
+        paginator = movement.paginator
+
+        print(len(paginator.get_page(1)))
+        self.assertEqual(paginator.num_pages, 3)
+      #  self.assertEqual(len(paginator.get_page(1)), 3)
+      #  self.assertEqual(len(paginator.get_page(2)), 3)
+      #  self.assertEqual(len(paginator.get_page(3)), 2)

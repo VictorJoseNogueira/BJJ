@@ -1,7 +1,7 @@
 from django.urls import resolve, reverse
 
 from handbook import views
-
+from unittest.mock import patch
 from .test_move_base import MovesTestBase
 
 # teste @skip("texto")
@@ -41,3 +41,19 @@ class Moves_home_views_test(MovesTestBase):
         self.make_moviment(is_published=False)
         response = self.client.get(reverse("moves:home"))
         self.assertIn('Administrador esta preguiçoso mande ele aprovar as tecnicas logo', response.content.decode('utf-8'))  # noqa E501
+
+    @patch('handbook.views.PER_PAGE', new=3)
+    def test_move_home_is_paginated(self):
+
+        for i in range(8):
+            kwargs = {'title_slug': f'r{i}', 'author_data': {'username': f'ú{i}'}}  # noqa E501
+            self.make_moviment(**kwargs)
+
+        response = self.client.get(reverse('moves:home'))
+        movement = response.context['moves']
+        paginator = movement.paginator
+
+        self.assertEqual(paginator.num_pages, 3)
+        self.assertEqual(len(paginator.get_page(1)), 3)
+        self.assertEqual(len(paginator.get_page(2)), 3)
+        self.assertEqual(len(paginator.get_page(3)), 2)

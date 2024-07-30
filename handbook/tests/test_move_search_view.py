@@ -1,7 +1,5 @@
 from django.urls import resolve, reverse
-
 from handbook import views
-
 from .test_move_base import MovesTestBase
 
 # teste @skip("texto")
